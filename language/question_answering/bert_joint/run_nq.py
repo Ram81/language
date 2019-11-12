@@ -247,6 +247,8 @@ def get_first_annotation(e):
         of the short answer. The end token is exclusive.
   """
   print(e)
+  if not ("annotations" in e.keys()):
+      return None, -1, (-1, -1)
   positive_annotations = sorted(
       [a for a in e["annotations"] if has_long_answer(a)],
       key=lambda a: a["long_answer"]["candidate_index"])
