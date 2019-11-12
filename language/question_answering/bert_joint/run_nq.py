@@ -277,7 +277,7 @@ def get_text_span(example, span):
   tokens = []
   for i in range(span["start_token"], span["end_token"]):
     t = example["document_text"].split(' ')[i]
-    if is_html_token(t):
+    if not is_html_token(t):
       token_positions.append(i)
       token = t.replace(" ", "")
       tokens.append(token)
@@ -289,9 +289,9 @@ def token_to_char_offset(e, candidate_idx, token_idx):
   c = e["long_answer_candidates"][candidate_idx]
   char_offset = 0
   for i in range(c["start_token"], token_idx):
-    t = e["document_tokens"][i]
-    if not t["html_token"]:
-      token = t["token"].replace(" ", "")
+    t = e["document_text"][i]
+    if not is_html_token(t):
+      token = t.replace(" ", "")
       char_offset += len(token) + 1
   return char_offset
 
@@ -299,7 +299,7 @@ def token_to_char_offset(e, candidate_idx, token_idx):
 def get_candidate_type(e, idx):
   """Returns the candidate's type: Table, Paragraph, List or Other."""
   c = e["long_answer_candidates"][idx]
-  first_token = e["document_tokens"][c["start_token"]]["token"]
+  first_token = e["document_text"][c["start_token"]]
   if first_token == "<Table>":
     return "Table"
   elif first_token == "<P>":
