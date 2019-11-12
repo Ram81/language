@@ -410,7 +410,7 @@ def create_example_from_jsonl(line):
 
   # Assemble example.
   example = {
-      "name": e["document_title"],
+      # "name": e["document_title"],
       "id": str(e["example_id"]),
       "questions": [question],
       "answers": [answer],
