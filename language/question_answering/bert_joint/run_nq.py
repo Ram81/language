@@ -246,7 +246,6 @@ def get_first_annotation(e):
     annotated_sa: (tuple) char offset of the start and end token
         of the short answer. The end token is exclusive.
   """
-  print(e)
   if not ("annotations" in e.keys()):
       return None, -1, (-1, -1)
   positive_annotations = sorted(
@@ -292,7 +291,7 @@ def token_to_char_offset(e, candidate_idx, token_idx):
   c = e["long_answer_candidates"][candidate_idx]
   char_offset = 0
   for i in range(c["start_token"], token_idx):
-    t = e["document_text"][i]
+    t = e["document_text"].split(' ')[i]
     if not is_html_token(t):
       token = t.replace(" ", "")
       char_offset += len(token) + 1
@@ -302,7 +301,7 @@ def token_to_char_offset(e, candidate_idx, token_idx):
 def get_candidate_type(e, idx):
   """Returns the candidate's type: Table, Paragraph, List or Other."""
   c = e["long_answer_candidates"][idx]
-  first_token = e["document_text"][c["start_token"]]
+  first_token = e["document_text"].split(' ')[c["start_token"]]
   if first_token == "<Table>":
     return "Table"
   elif first_token == "<P>":
