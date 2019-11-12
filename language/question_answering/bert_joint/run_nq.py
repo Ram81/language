@@ -277,7 +277,7 @@ def get_text_span(example, span):
   tokens = []
   for i in range(span["start_token"], span["end_token"]):
     t = example["document_text"].split(' ')[i]
-    if is_html_token(t["html_token"]):
+    if is_html_token(t):
       token_positions.append(i)
       token = t.replace(" ", "")
       tokens.append(token)
