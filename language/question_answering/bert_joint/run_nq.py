@@ -246,6 +246,7 @@ def get_first_annotation(e):
     annotated_sa: (tuple) char offset of the start and end token
         of the short answer. The end token is exclusive.
   """
+  print(e)
   positive_annotations = sorted(
       [a for a in e["annotations"] if has_long_answer(a)],
       key=lambda a: a["long_answer"]["candidate_index"])
