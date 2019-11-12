@@ -269,6 +269,7 @@ def get_text_span(example, span):
   """Returns the text in the example's document in the given token span."""
   token_positions = []
   tokens = []
+  print(example, span)
   for i in range(span["start_token"], span["end_token"]):
     t = example["document_tokens"][i]
     if not t["html_token"]:
