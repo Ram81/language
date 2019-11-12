@@ -266,7 +266,7 @@ def get_first_annotation(e):
 
 
 def is_html_token(token):
-    if token.trim()[0] == '<' and token.trim()[-1] == '>':
+    if token.strip()[0] == '<' and token.strip()[-1] == '>':
         return True
     return False
 
