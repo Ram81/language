@@ -265,16 +265,21 @@ def get_first_annotation(e):
   return None, -1, (-1, -1)
 
 
+def is_html_token(token):
+    if token.trim()[0] == '<' and token.trim()[-1] == '>':
+        return True
+    return False
+
+
 def get_text_span(example, span):
   """Returns the text in the example's document in the given token span."""
   token_positions = []
   tokens = []
-  print(example, span)
   for i in range(span["start_token"], span["end_token"]):
-    t = example["document_tokens"][i]
-    if not t["html_token"]:
+    t = example["document_text"].split(' ')[i]
+    if is_html_token(t["html_token"]):
       token_positions.append(i)
-      token = t["token"].replace(" ", "")
+      token = t.replace(" ", "")
       tokens.append(token)
   return TextSpan(token_positions, " ".join(tokens))
 
