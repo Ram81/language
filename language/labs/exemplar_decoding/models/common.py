@@ -58,7 +58,7 @@ def get_rnn_cell(mode,
   """
 
   cells = []
-  for i in xrange(num_layers):
+  for i in range(num_layers):
     input_size = input_dim if i == 0 else num_units
     scale = 1.
     if cell_type == "lstm":

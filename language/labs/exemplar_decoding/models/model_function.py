@@ -51,7 +51,7 @@ def remove_repetitive_trigram(preds, lengths, vocab, hps):
   ret_preds, ret_lengths = [], []
   for (pred, length) in zip(preds, lengths):
     flag = True
-    for i in xrange(hps.beam_width):
+    for i in range(hps.beam_width):
       l = length[Ellipsis, i]
       p = pred[Ellipsis, i][:l]
       tokens = data.id2text(p, vocab=vocab, use_bpe=hps.use_bpe).split()
